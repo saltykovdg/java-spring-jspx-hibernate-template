@@ -1,0 +1,103 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0">
+    <spring:url value="/login" var="loginUrl"/>
+    <spring:url value="/signUp" var="signUpUrl"/>
+    <spring:url value="/login?locale=en_US" var="localeEnUrl"/>
+    <spring:url value="/login?locale=ru_RU" var="localeRuUrl"/>
+
+    <div class="container">
+        <form action="${loginUrl}" method="POST">
+            <input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token}'/>
+
+            <h3>
+                <spring:message code="page.login.header"/>
+            </h3>
+
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true"><![CDATA[&times;]]></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <spring:message code="${error}"/>
+                </div>
+            </c:if>
+            <c:if test="${not empty logout}">
+                <div class="alert alert-info" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true"><![CDATA[&times;]]></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <spring:message code="${logout}"/>
+                </div>
+            </c:if>
+
+            <div class="form-group">
+                <spring:message code="page.login.email" var="email"/>
+                <input type="username" name="username" class="form-control" placeholder="${email}"/>
+            </div>
+
+            <div class="form-group">
+                <spring:message code="page.login.passwordField" var="passwordField"/>
+                <input type="password" name="password" class="form-control" placeholder="${passwordField}"/>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember-me"/> <spring:message code="page.login.rememberMe"/>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">
+                <spring:message code="page.login.loginButton"/>
+            </button>
+
+            <hr/>
+
+            <a href="${signUpUrl}"><spring:message code="page.login.signUp"/></a>
+
+            <div class="form-group pull-right">
+                <spring:message code="footer.locale"/>
+                &#160;
+                <a href="${localeEnUrl}">
+                    <spring:message code="footer.locale-en"/>
+                </a>
+                /
+                <a href="${localeRuUrl}">
+                    <spring:message code="footer.locale-ru"/>
+                </a>
+            </div>
+
+            <hr/>
+
+            <table class="table">
+                <caption>
+                    <spring:message code="page.login.testData"/>
+                </caption>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>${email}</th>
+                    <th>${passwordField}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>admin@mail.com</td>
+                    <td>admin@mail.com</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>user@mail.com</td>
+                    <td>user@mail.com</td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</jsp:root>

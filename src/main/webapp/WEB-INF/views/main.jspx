@@ -1,0 +1,14 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:security="http://www.springframework.org/security/tags"
+          version="2.0">
+    <security:authorize access="isRememberMe()">
+        <div><spring:message code="page.main.userIsLoginRememberMeCookies"/></div>
+    </security:authorize>
+    <security:authorize access="isFullyAuthenticated()">
+        <div><spring:message code="page.main.userIsLoginUsernamePassword"/></div>
+    </security:authorize>
+    <security:authorize access="isAnonymous()">
+        <div><spring:message code="page.main.userIsAnonymous"/></div>
+    </security:authorize>
+</jsp:root>

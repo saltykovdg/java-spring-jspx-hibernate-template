@@ -1,0 +1,41 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          version="2.0">
+    <html>
+
+    <jsp:output doctype-root-element="HTML"
+                doctype-system="about:legacy-compat"
+                omit-xml-declaration="yes"/>
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:directive.page pageEncoding="UTF-8"/>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+        <spring:url value="/resources/favicon.ico" var="resourceLink"/>
+        <link rel="shortcut icon" href="${resourceLink}" type="image/x-icon"/>
+
+        <spring:url value="/resources/css/bootstrap.min.css" var="resourceLink"/>
+        <link rel="stylesheet" href="${resourceLink}" type="text/css"/>
+
+        <spring:url value="/resources/js/jquery-3.1.0.min.js" var="resourceLink"/>
+        <script type="text/javascript" src="${resourceLink}"><!--empty--></script>
+
+        <spring:url value="/resources/js/bootstrap.min.js" var="resourceLink"/>
+        <script type="text/javascript" src="${resourceLink}"><!--empty--></script>
+
+        <title><spring:message code="application.title"/></title>
+    </head>
+
+    <body>
+    <div class="container-fluid">
+        <tiles:insertAttribute name="header"/>
+        <tiles:insertAttribute name="content"/>
+        <tiles:insertAttribute name="footer"/>
+    </div>
+    </body>
+
+    </html>
+</jsp:root>

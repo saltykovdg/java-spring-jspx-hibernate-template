@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="defaultView" template="/WEB-INF/views/default.jspx">
+        <put-attribute name="header" value="/WEB-INF/views/header.jspx" cascade="true"/>
+        <put-attribute name="content" value="" cascade="true"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" cascade="true"/>
+    </definition>
+
+    <definition name="loginView" extends="defaultView">
+        <put-attribute name="header" value="" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/views/login.jspx" cascade="true"/>
+        <put-attribute name="footer" value="" cascade="true"/>
+    </definition>
+
+    <definition name="signUpView" extends="defaultView">
+        <put-attribute name="header" value="" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/views/signUp.jspx" cascade="true"/>
+        <put-attribute name="footer" value="" cascade="true"/>
+    </definition>
+
+    <definition name="mainView" extends="defaultView">
+        <put-attribute name="content" value="/WEB-INF/views/main.jspx" cascade="true"/>
+    </definition>
+    <definition name="adminView" extends="defaultView">
+        <put-attribute name="content" value="/WEB-INF/views/admin.jspx" cascade="true"/>
+    </definition>
+    <definition name="userView" extends="defaultView">
+        <put-attribute name="content" value="/WEB-INF/views/user.jspx" cascade="true"/>
+    </definition>
+    <definition name="error403View" extends="defaultView">
+        <put-attribute name="content" value="/WEB-INF/views/error403.jspx" cascade="true"/>
+    </definition>
+    <definition name="errorAllView" extends="defaultView">
+        <put-attribute name="content" value="/WEB-INF/views/errorAll.jspx" cascade="true"/>
+    </definition>
+</tiles-definitions>

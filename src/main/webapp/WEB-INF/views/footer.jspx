@@ -1,0 +1,24 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          version="2.0">
+    <spring:url value="${requestScope['javax.servlet.forward.request_uri']}?locale=en_US" var="localeEnUrl"/>
+    <spring:url value="${requestScope['javax.servlet.forward.request_uri']}?locale=ru_RU" var="localeRuUrl"/>
+
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <p class="navbar-text">
+            <spring:message code="footer.text"/>
+        </p>
+        <p class="navbar-text navbar-right">
+            <spring:message code="footer.locale"/>
+            &#160;
+            <a href="${localeEnUrl}">
+                <spring:message code="footer.locale-en"/>
+            </a>
+            /
+            <a href="${localeRuUrl}">
+                <spring:message code="footer.locale-ru"/>
+            </a>
+            &#160;&#160;&#160;&#160;&#160;&#160;
+        </p>
+    </nav>
+</jsp:root>

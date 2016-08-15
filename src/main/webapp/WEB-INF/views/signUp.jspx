@@ -1,0 +1,101 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:form="http://www.springframework.org/tags/form"
+          version="2.0">
+    <spring:url value="/login" var="loginUrl"/>
+    <spring:url value="/signUp" var="signUpUrl"/>
+    <spring:url value="/signUp?locale=en_US" var="localeEnUrl"/>
+    <spring:url value="/signUp?locale=ru_RU" var="localeRuUrl"/>
+
+    <div class="container">
+        <form:form action="${signUpUrl}" modelAttribute="userDto" method="POST">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <h3><spring:message code="page.signUp.header"/></h3>
+
+            <c:set var="passwordErrors"><form:errors path="password"/></c:set>
+            <c:set var="passwordConfirmErrors"><form:errors path="passwordConfirm"/></c:set>
+            <c:set var="passwordsMatchErrors"><form:errors path="passwordsMatch"/></c:set>
+            <c:set var="emailErrors"><form:errors path="email"/></c:set>
+            <c:set var="correctEmailErrors"><form:errors path="correctEmail"/></c:set>
+            <c:set var="agreeErrors"><form:errors path="agree"/></c:set>
+
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true"><![CDATA[&times;]]></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <spring:message code="${error}"/>
+                </div>
+            </c:if>
+
+            <div class="form-group ${not empty emailErrors || not empty correctEmailErrors ? 'has-error' : ''}">
+                <c:choose>
+                    <c:when test="${not empty emailErrors}">
+                        <span class="label label-danger">${emailErrors}</span>
+                    </c:when>
+                    <c:when test="${not empty correctEmailErrors}">
+                        <span class="label label-danger">${correctEmailErrors}</span>
+                    </c:when>
+                </c:choose>
+                <spring:message code="page.signUp.email" var="email"/>
+                <form:input cssClass="form-control" path="email" placeholder="${email}"/>
+            </div>
+            <div class="form-group ${not empty passwordErrors ? 'has-error' : ''}">
+                <c:if test="${not empty passwordErrors}">
+                    <span class="label label-danger">${passwordErrors}</span>
+                </c:if>
+                <spring:message code="page.signUp.password" var="password"/>
+                <form:input cssClass="form-control" path="password" type="password" placeholder="${password}"/>
+            </div>
+            <div class="form-group ${not empty passwordConfirmErrors || not empty passwordsMatchErrors ? 'has-error' : ''}">
+                <c:choose>
+                    <c:when test="${not empty passwordConfirmErrors}">
+                        <span class="label label-danger">${passwordConfirmErrors}</span>
+                    </c:when>
+                    <c:when test="${not empty passwordsMatchErrors}">
+                        <span class="label label-danger">${passwordsMatchErrors}</span>
+                    </c:when>
+                </c:choose>
+                <spring:message code="page.signUp.passwordConfirm" var="passwordConfirm"/>
+                <form:input cssClass="form-control" path="passwordConfirm" type="password"
+                            placeholder="${passwordConfirm}"/>
+            </div>
+            <div class="form-group ${not empty agreeErrors ? 'has-error' : ''}">
+                <c:if test="${not empty agreeErrors}">
+                    <span class="label label-danger">${agreeErrors}</span>
+                </c:if>
+
+                <div class="checkbox">
+                    <div class="checkbox">
+                        <label>
+                            <form:checkbox path="agree" value="false"/> <spring:message code="page.signUp.agree"/>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">
+                <spring:message code="page.signUp.signUpButton"/>
+            </button>
+
+            <hr/>
+
+            <a href="${loginUrl}"><spring:message code="page.signUp.cancelLink"/></a>
+
+            <div class="form-group pull-right">
+                <spring:message code="footer.locale"/>
+                &#160;
+                <a href="${localeEnUrl}">
+                    <spring:message code="footer.locale-en"/>
+                </a>
+                /
+                <a href="${localeRuUrl}">
+                    <spring:message code="footer.locale-ru"/>
+                </a>
+            </div>
+        </form:form>
+    </div>
+</jsp:root>

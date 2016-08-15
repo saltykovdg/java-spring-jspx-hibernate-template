@@ -1,0 +1,12 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:spring="http://www.springframework.org/tags"
+          xmlns:security="http://www.springframework.org/security/tags"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0" >
+    <security:authentication var="user" property="principal"/>
+    <c:if test="${not empty user and not empty user.username}">
+        <spring:message code="page.admin.text"/>
+        <br/>
+        <b>[${user.username}]</b>
+    </c:if>
+</jsp:root>
