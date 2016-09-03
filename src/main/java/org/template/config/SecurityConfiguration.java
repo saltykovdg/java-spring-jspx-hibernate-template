@@ -16,10 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Configuration
@@ -58,10 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding(StandardCharsets.UTF_8.displayName());
-        filter.setForceEncoding(true);
-        http.addFilterBefore(filter, CsrfFilter.class);
         http.authorizeRequests()
                 .antMatchers(Constants.Url.RESOURCES + "/**").permitAll()
                 .antMatchers(Constants.Url.ROOT).permitAll()

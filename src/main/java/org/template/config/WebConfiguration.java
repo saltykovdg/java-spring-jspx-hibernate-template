@@ -1,5 +1,6 @@
 package org.template.config;
 
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.template.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -79,5 +80,12 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setDefaultEncoding(StandardCharsets.UTF_8.name());
+        return new CommonsMultipartResolver();
     }
 }
